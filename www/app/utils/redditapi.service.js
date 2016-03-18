@@ -6,7 +6,7 @@ function RedditAPI($rootScope, $q, $http, $base64, APIConsts, $cordovaInAppBrows
     getAccessToken: getAccessToken,
     refreshAccessToken: refreshAccessToken,
     getMe: getMe,
-    getFrontPagePosts: getFrontPagePosts,
+    getSubredditPosts: getSubredditPosts,
     getSubredditList: getSubredditList
   }
 
@@ -125,8 +125,15 @@ function RedditAPI($rootScope, $q, $http, $base64, APIConsts, $cordovaInAppBrows
     return deferred.promise;
   }
 
-  function getFrontPagePosts(count, after) {
-       var url = APIConsts.oauthURL + '/.json';
+  function getSubredditPosts(count, after, name) {
+      var url;
+      if (name) {
+          url = APIConsts.oauthURL + '/r/' + name + '/.json';
+      }
+      else {
+           url = APIConsts.oauthURL + '/.json';
+      }
+
       if (!count || count === 0) {
           return $http.get(url);
       }

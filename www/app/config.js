@@ -14,12 +14,16 @@ angular.module("snoosnoo")
     .state('menu', {
         url: '/menu',
         abstract: true,
-        templateUrl: 'menu/menu.html',
+        templateUrl: 'app/menu/menu.html',
         controller: 'MenuController'
     })
-    .state('frontpage', {
-      url: '/',
-      templateUrl: 'app/frontpage/frontpage.html',
-      controller: 'FrontPageController'
+    .state('menu.subreddit', {
+      url: '/subreddit/:name',
+      views: {
+          'menuContent': {
+              templateUrl: 'app/subreddit/subreddit.html',
+              controller: 'SubredditController'
+          }
+      }
   });
 });

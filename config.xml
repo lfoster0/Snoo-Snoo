@@ -7,7 +7,7 @@
   <author email="lee@leefoster.me" href="www.leefoster.me">
       Your Name Here
     </author>
-  <content src="http://192.168.1.76:8101" original-src="index.html"/>
+  <content src="index.html"/>
   <access origin="*"/>
   <allow-navigation href="http://*/*"/>
   <preference name="Orientation" value="portrait"/>

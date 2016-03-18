@@ -1,0 +1,37 @@
+<ion-view view-title="{{title}}">
+  <ion-content class="has-header">
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+
+    <ion-list>
+      <ion-item class="item-text-wrap" ng-repeat="post in posts">
+        <div class="post-score">
+            <i class="icon ion-arrow-up-a"></i>
+            {{post.data.score}}
+        </div>
+        <div>
+          <span class="post-title">{{post.data.title}}</span>
+          <span class="post-domain">
+            <i class="icon ion-radio-waves"></i>
+            <span class="post-domain-text">{{post.data.domain}}</span>
+        </span>
+        </div>
+        <div class="post-second-row">
+          <span class="post-time">
+              <i class="icon ion-ios-clock-outline"></i>
+              <span am-time-ago="post.data.created_utc | amFromUnix"></span>
+          </span>
+
+          <span class="post-user">
+            /u/ {{post.data.author}}</span>
+          <span class="post-subreddit">/r/
+            {{post.data.subreddit | uppercase}}</span>
+        </div>
+        <div class="post-comment-count">
+          <span>{{post.data.num_comments}} Comments</span>
+           <i class="icon ion-arrow-down-b"></i>
+        </div>
+      </ion-item>
+      <ion-infinite-scroll ng-if='canLoadMore()' on-infinite="loadPosts()" distance="1%"></ion-infinite-scroll>
+    </ion-list>
+  </ion-content>
+</ion-view>

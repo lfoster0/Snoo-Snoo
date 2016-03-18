@@ -9,6 +9,7 @@ angular.module('snoosnoo',
     'ionic',
     'ngResource',
     'ngCordova',
-    'base64'
+    'base64',
+    'angularMoment'
     ]
 )

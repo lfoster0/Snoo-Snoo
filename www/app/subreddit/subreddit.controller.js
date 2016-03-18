@@ -1,23 +1,37 @@
-angular.module("snoosnoo").controller("FrontPageController", FrontPageController);
+angular.module("snoosnoo").controller("SubredditController", SubredditController);
 
-function FrontPageController($scope, RedditAPI, $http, $ionicSideMenuDelegate) {
+function SubredditController($scope, RedditAPI, $http, $state) {
 
   $scope.loadPosts = loadPosts;
   $scope.doRefresh = doRefresh;
   $scope.canLoadMore = canLoadMore;
-  $scope.loadSubreddits = loadSubreddits;
   $scope.posts = [];
-  $scope.subreddits = [];
+
+  if ($state.params.name) {
+      $scope.title = $state.params.name;
+  }
+  else {
+      $scope.title = "Frontpage"
+  }
   var after = 0;
   var count = 0;
   var before = 0;
   var lastCallFailed = false;
+  var subredditData = $state.params.name;
 
   /////////////////
   function loadPosts() {
-    RedditAPI.getFrontPagePosts(count, after).then(success).catch(failure);
+    if (subredditData) {
+        RedditAPI.getSubredditPosts(count, after, $state.params.name).then(success).catch(failure);
+    }
+    else {
+        console.log('getting frontpage');
+        RedditAPI.getSubredditPosts(count, after).then(success).catch(failure);
+    }
+
 
     function success(response) {
+      console.log("success getting front page posts");
       count += response.data.data.children.length;
       after = response.data.data.after;
       before = response.data.data.before;
@@ -27,6 +41,7 @@ function FrontPageController($scope, RedditAPI, $http, $ionicSideMenuDelegate) {
     }
 
     function failure(err) {
+        console.log('failure getting front page');
       lastCallFailed = true;
       $scope.$broadcast('scroll.infiniteScrollComplete');
     }
@@ -46,17 +61,5 @@ function FrontPageController($scope, RedditAPI, $http, $ionicSideMenuDelegate) {
           return false;
       }
       return true;
-  }
-
-  function loadSubreddits() {
-      RedditAPI.getSubredditList().then(success).catch(failure);
-
-      function success(response) {
-          $scope.subreddits = response.data.data.children;
-      }
-
-      function failure(err) {
-          console.log('error loading subreddit list' + JSON.stringify(err));
-      }
   }
 }

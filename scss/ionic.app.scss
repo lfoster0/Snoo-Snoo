@@ -17,10 +17,76 @@ $dark:                            #444 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
+$positive: #F7412D !default;
+$dark: #000000 !default;
+$stable: #9B9B9B !default;
+$upvote: #FF9100 !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.post-score {
+    color: $upvote;
+    font-size: $font-size-base;
+    padding-bottom: $padding-base-vertical;
+}
+.post-title {
+    font-weight: bolder;
+    font-size: $font-size-large;
+    padding-right: $padding-base-horizontal;
+    color: $dark;
+}
+
+.post-domain {
+    color: $stable;
+    display: inline-block;
+}
+
+.post-domain * {
+    vertical-align: top;
+}
+
+.post-domain-text {
+    font-size: $font-size-small;
+}
+
+.post-second-row {
+    padding-top: $padding-large-vertical;
+}
+
+.post-second-row * {
+    vertical-align: top;
+    font-size: $font-size-small;
+}
+.post-time span {
+    font-size: $font-size-small;
+    font-weight: bold;
+    color: $dark;
+    padding-left: 3px;
+}
+
+.post-time i {
+    font-size: $font-size-large;
+    color: $stable;
+}
+
+.post-user {
+    padding-left: $padding-small-horizontal;
+    color: $stable;
+}
+
+.post-subreddit {
+    float: right;
+    font-weight: bold;
+    color: $dark;
+}
+
+.post-comment-count {
+    color: $dark;
+    font-size: $font-size-small;
+    padding-top: $padding-large-vertical;
+    font-weight: bold;
+}
 // /* Empty. Add your own CSS if you like */
 // @font-face {
 //     font-family: 'OpenSans-Regular';

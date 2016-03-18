@@ -13,7 +13,7 @@ function LoginController($scope, RedditAPI, $state, $http, $ionicHistory) {
           $ionicHistory.nextViewOptions({
             disableBack: true
           });
-          $state.go('frontpage');
+          $state.go('menu.subreddit');
       }
       else {
           // window.localStorage.clear();
@@ -24,7 +24,7 @@ function LoginController($scope, RedditAPI, $state, $http, $ionicHistory) {
             $ionicHistory.nextViewOptions({
               disableBack: true
             });
-            $state.go('frontpage');
+            $state.go('menu.subreddit');
           }
 
           function failure(err) {

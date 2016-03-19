@@ -19,27 +19,42 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 $positive: #F7412D !default;
 $dark: #000000 !default;
-$stable: #9B9B9B !default;
-$upvote: #FF9100 !default;
 
+$upvote: #FF9100;
+
+$text-light: #FFFFFF;
+$text-dark: #000000;
+$text-light-gray: #BDBDBD;
+$text-dark-gray: #9E9E9E;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+
+
+.post {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.post-no-image {
+    font-weight: bold;
+}
 
 .post-score {
     color: $upvote;
     font-size: $font-size-base;
+    font-weight: normal;
     padding-bottom: $padding-base-vertical;
 }
+
 .post-title {
     font-weight: bolder;
     font-size: $font-size-large;
     padding-right: $padding-base-horizontal;
-    color: $dark;
 }
 
 .post-domain {
-    color: $stable;
     display: inline-block;
+    font-weight: normal;
 }
 
 .post-domain * {
@@ -60,32 +75,46 @@ $upvote: #FF9100 !default;
 }
 .post-time span {
     font-size: $font-size-small;
-    font-weight: bold;
-    color: $dark;
     padding-left: 3px;
 }
 
 .post-time i {
     font-size: $font-size-large;
-    color: $stable;
 }
 
 .post-user {
     padding-left: $padding-small-horizontal;
-    color: $stable;
+    font-weight: normal;
 }
 
 .post-subreddit {
     float: right;
-    font-weight: bold;
-    color: $dark;
 }
 
 .post-comment-count {
-    color: $dark;
     font-size: $font-size-small;
     padding-top: $padding-large-vertical;
-    font-weight: bold;
+}
+
+.post-no-image {
+    color: $text-dark;
+
+
+    .post-user,
+    .post-time i,
+    .post-domain {
+        color: $text-dark-gray;
+    }
+}
+
+.post-image {
+    color: $text-light;
+
+    .post-user,
+    .post-time i,
+    .post-domain {
+        color: $text-light-gray;
+    }
 }
 // /* Empty. Add your own CSS if you like */
 // @font-face {

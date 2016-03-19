@@ -5,6 +5,7 @@ function SubredditController($scope, RedditAPI, $http, $state) {
   $scope.loadPosts = loadPosts;
   $scope.doRefresh = doRefresh;
   $scope.canLoadMore = canLoadMore;
+  $scope.getThumbnailURL = getThumbnailURL;
   $scope.posts = [];
 
   if ($state.params.name) {
@@ -28,7 +29,6 @@ function SubredditController($scope, RedditAPI, $http, $state) {
         console.log('getting frontpage');
         RedditAPI.getSubredditPosts(count, after).then(success).catch(failure);
     }
-
 
     function success(response) {
       console.log("success getting front page posts");
@@ -61,5 +61,13 @@ function SubredditController($scope, RedditAPI, $http, $state) {
           return false;
       }
       return true;
+  }
+
+  function getThumbnailURL(post) {
+
+      if (!post.data.preview)
+        return;
+       var encodedURL = post.data.preview.images[0].resolutions[post.data.preview.images[0].resolutions.length - 1].url;
+      return encodedURL.replace(/&amp;/g, '&');
   }
 }

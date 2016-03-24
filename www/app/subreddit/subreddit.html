@@ -3,10 +3,15 @@
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
 
     <ion-list>
-      <ion-item back-img='{{getThumbnailURL(post)}}' ng-class="{'post-no-image item-text-wrap': !post.data.preview, 'post-image item-text-wrap': post.data.preview}" ng-repeat="post in posts">
-          <div class="post-score">
-            <i class="icon ion-arrow-up-a"></i>
-            {{post.data.score}}
+      <ion-item on-swipe-right="vote($index, 1)" on-swipe-left="vote($index, -1)" back-img='{{getThumbnailURL(post)}}'
+        ng-class="{'post-no-image item-text-wrap': !post.data.preview, 'post-image item-text-wrap': post.data.preview}"
+        ng-repeat="post in posts"
+        ng-click="itemClicked(post)">
+
+        </div>
+          <div ng-class="{'post-score': !post.vote, 'post-score upvote': post.vote == 'upvote', 'post-score downvote': post.vote == 'downvote'}">
+            <i ng-class="{'icon ion-record': !post.vote, 'icon ion-arrow-up-a': post.vote == 'upvote', 'icon ion-arrow-down-a': post.vote == 'downvote'}"></i>
+            <span class="post-score-text">{{post.data.score}}</span>
           </div>
           <div>
             <span class="post-title">{{post.data.title}}</span>
@@ -32,7 +37,6 @@
               Comments</span>
             <i class="icon ion-arrow-down-b"></i>
           </div>
-
       </ion-item>
       <ion-infinite-scroll ng-if='canLoadMore()' on-infinite="loadPosts()" distance="1%"></ion-infinite-scroll>
     </ion-list>

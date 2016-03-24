@@ -7,7 +7,8 @@ function RedditAPI($rootScope, $q, $http, $base64, APIConsts, $cordovaInAppBrows
     refreshAccessToken: refreshAccessToken,
     getMe: getMe,
     getSubredditPosts: getSubredditPosts,
-    getSubredditList: getSubredditList
+    getSubredditList: getSubredditList,
+    vote: vote
   }
 
   return service;
@@ -21,7 +22,7 @@ function RedditAPI($rootScope, $q, $http, $base64, APIConsts, $cordovaInAppBrows
    */
   function authenticate() {
     var deferred = $q.defer();
-    var scope = ['identity', 'read', 'mysubreddits'];
+    var scope = ['identity', 'read', 'mysubreddits', 'vote'];
     var url = APIConsts.baseURL +
       APIConsts.apiURL +
       APIConsts.authURL +
@@ -144,5 +145,12 @@ function RedditAPI($rootScope, $q, $http, $base64, APIConsts, $cordovaInAppBrows
   function getSubredditList() {
       var url = APIConsts.oauthURL + "/subreddits/default";
       return $http.get(url);
+  }
+
+  function vote(direction, name) {
+      var url = APIConsts.oauthURL + "/api/vote";
+      var data = "dir=1" + "&id=" + name;
+      $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+      return $http.post(url, data);
   }
 }

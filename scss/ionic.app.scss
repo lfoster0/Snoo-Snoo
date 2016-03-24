@@ -18,9 +18,14 @@ $dark:                            #444 !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 $positive: #F7412D !default;
-$dark: #000000 !default;
 
-$upvote: #FF9100;
+$upvote-dark: #ff5700;
+$downvote-dark: #9494FF;
+$novote-dark: #ff8b60;
+
+$upvote-light: #f76417;
+$downvote-light: #b5b5fe;
+$novote-light: #fca483;
 
 $text-light: #FFFFFF;
 $text-dark: #000000;
@@ -29,21 +34,38 @@ $text-dark-gray: #9E9E9E;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-
-.post {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-.post-no-image {
+.post-no-image,
+.post-image {
     font-weight: bold;
 }
 
 .post-score {
-    color: $upvote;
     font-size: $font-size-base;
-    font-weight: normal;
+    font-weight: bold;
     padding-bottom: $padding-base-vertical;
+
+    i {
+        font-size: $font-size-small;
+        bottom: 1px;
+        position: relative;
+    }
+
+    span {
+        padding-left: 5px;
+    }
+}
+
+.downvote i,
+.upvote i {
+    font-size: $font-size-large;
+}
+
+.downvote i {
+    top: 2px;
+}
+
+.upvote i {
+    top: 1px;
 }
 
 .post-title {
@@ -99,11 +121,22 @@ $text-dark-gray: #9E9E9E;
 .post-no-image {
     color: $text-dark;
 
-
     .post-user,
     .post-time i,
     .post-domain {
         color: $text-dark-gray;
+    }
+
+    .post-score {
+        color: $novote-dark;
+    }
+
+    .upvote {
+        color: $upvote-dark;
+    }
+
+    .downvote {
+        color: $downvote-dark;
     }
 }
 
@@ -114,6 +147,18 @@ $text-dark-gray: #9E9E9E;
     .post-time i,
     .post-domain {
         color: $text-light-gray;
+    }
+
+    .post-score {
+        color: $novote-light;
+    }
+
+    .upvote {
+        color: $upvote-light;
+    }
+
+    .downvote {
+        color: $downvote-light;
     }
 }
 // /* Empty. Add your own CSS if you like */

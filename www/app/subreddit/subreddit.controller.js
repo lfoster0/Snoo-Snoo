@@ -6,8 +6,9 @@ function SubredditController($scope, RedditAPI, $http, $state) {
   $scope.doRefresh = doRefresh;
   $scope.canLoadMore = canLoadMore;
   $scope.getThumbnailURL = getThumbnailURL;
-  $scope.posts = [];
+  $scope.vote = vote;
 
+  $scope.posts = [];
   if ($state.params.name) {
       $scope.title = $state.params.name;
   }
@@ -64,10 +65,25 @@ function SubredditController($scope, RedditAPI, $http, $state) {
   }
 
   function getThumbnailURL(post) {
-
       if (!post.data.preview)
         return;
        var encodedURL = post.data.preview.images[0].resolutions[post.data.preview.images[0].resolutions.length - 1].url;
       return encodedURL.replace(/&amp;/g, '&');
+  }
+
+  function vote(postIndex, direction) {
+      RedditAPI.vote(direction, $scope.posts[postIndex].data.name).then(success).catch(failure);
+      function success(response) {
+          console.log('vote success: ' + JSON.stringify(response));
+      }
+
+      function failure(err) {
+          console.log('vote error: ' + JSON.stringify(err));
+      }
+
+      if (direction == 1)
+        $scope.posts[postIndex].vote = 'upvote';
+      if (direction == -1)
+        $scope.posts[postIndex].vote = 'downvote';
   }
 }
